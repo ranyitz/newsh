@@ -1,3 +1,3 @@
-# open-term
+# newshell
 
 Open a new terminal window

@@ -1,8 +1,11 @@
 {
-  "name": "open-term",
+  "name": "newshell",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "newshell": "bin/newshell.js"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
@@ -33,6 +36,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "arg": "^4.1.3",
     "execa": "^4.0.0",
     "tempy": "^0.3.0"
   }
