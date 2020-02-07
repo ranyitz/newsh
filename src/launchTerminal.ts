@@ -1,8 +1,8 @@
-import execa from 'execa';
-import {detectTerminalApp} from './utils';
+import execa from "execa";
+import { detectTerminalApp } from "./utils";
 
 // Runs an sh file in a new terminal window
-export default function launchTerminal(execFilePath: string) {
+export default function launchTerminal(execFilePath: string): void {
   const terminalApp = detectTerminalApp();
 
   const isWindows = /^win/.test(process.platform);
@@ -10,27 +10,22 @@ export default function launchTerminal(execFilePath: string) {
   const isLinux = /linux/.test(process.platform);
 
   if (isWindows) {
-    throw new Error('windows is not yet supported');
-  }
-
-  else if (isMac) {
+    throw new Error("windows is not yet supported");
+  } else if (isMac) {
     try {
-      return execa.sync('open', ['-a', terminalApp!, execFilePath]);
+      execa.sync("open", ["-a", terminalApp!, execFilePath]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       console.log(execFilePath);
-      return execa.sync('open', [execFilePath]);
+      execa.sync("open", [execFilePath]);
     }
-  }
-
-
- else if(isLinux) {
+  } else if (isLinux) {
     try {
-      return execa.sync(terminalApp!, ['-e', `sh ${execFilePath}`], {
-        detached: true,
+      execa.sync(terminalApp!, ["-e", `sh ${execFilePath}`], {
+        detached: true
       });
-    } catch(error) {
-      return execa.sync('sh', [execFilePath]);
+    } catch (error) {
+      execa.sync("sh", [execFilePath]);
     }
   }
 }
