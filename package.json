@@ -1,7 +1,7 @@
 {
   "name": "newshell",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "bin": {
     "newshell": "bin/newshell.js"

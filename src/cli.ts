@@ -20,12 +20,14 @@ const help = `
   newshell - Running files/scripts in a new shell
   
   USAGE
-      $ newshell --help
-      $ newshell --version
+    $ newshell 
+    $ newshell [pathToScript, ...]
+    $ newshell --help
+    $ newshell --version
   
   OPTIONS
-      -h, --help                          Shows this help message
-      -v, --version                       Displays the current version of newshell
+    -h, --help       Shows this help message
+    -v, --version    Displays the current version of newshell
 `;
 
 if (args["--help"]) console.log(help);
