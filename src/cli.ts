@@ -5,8 +5,6 @@ import launchFileInNewTerminal from "./file";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
 
-// const info = message => chalk`{cyan INFO:} ${message}`;
-// const warning = message => chalk`{yellow WARNING:} ${message}`;
 const error = (message: string): string => chalk`{red ERROR:} ${message}`;
 
 const args = arg(
