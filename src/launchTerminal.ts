@@ -13,21 +13,23 @@ export default function launchTerminal(execFilePath: string) {
     throw new Error('windows is not yet supported');
   }
 
-  if (isMac) {
-    if (terminalApp) {
-      // only supports mac
-      return execa.sync('open', ['-a', terminalApp, execFilePath]);
-    } else {
+  else if (isMac) {
+    try {
+      return execa.sync('open', ['-a', terminalApp!, execFilePath]);
+    } catch (error) {
+      console.log(error)
+      console.log(execFilePath);
       return execa.sync('open', [execFilePath]);
     }
   }
 
-  if (isLinux) {
-    if (terminalApp) {
-      return execa.sync(terminalApp, ['-e', `sh ${execFilePath}`], {
+
+ else if(isLinux) {
+    try {
+      return execa.sync(terminalApp!, ['-e', `sh ${execFilePath}`], {
         detached: true,
       });
-    } else {
+    } catch(error) {
       return execa.sync('sh', [execFilePath]);
     }
   }
