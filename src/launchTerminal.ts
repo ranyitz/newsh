@@ -15,8 +15,6 @@ export default function launchTerminal(execFilePath: string): void {
     try {
       execa.sync("open", ["-a", terminalApp!, execFilePath]);
     } catch (error) {
-      console.log(error);
-      console.log(execFilePath);
       execa.sync("open", [execFilePath]);
     }
   } else if (isLinux) {
