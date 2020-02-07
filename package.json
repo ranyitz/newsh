@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "watch": "tsc --watch",
     "lint": "eslint '*/**/*.{js,ts}'",
-    "build": "tsc"
+    "test": "echo 'no tests'"
   },
   "husky": {
     "hooks": {
