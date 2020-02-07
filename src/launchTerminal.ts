@@ -10,7 +10,10 @@ export default function launchTerminal(execFilePath: string): void {
   const isLinux = /linux/.test(process.platform);
 
   if (isWindows) {
-    throw new Error("windows is not yet supported");
+    execa("cmd.exe", ["/C", execFilePath], {
+      detached: true,
+      stdio: "ignore"
+    });
   } else if (isMac) {
     try {
       execa.sync("open", ["-a", terminalApp!, execFilePath]);
