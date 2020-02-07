@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build",
     "target": "es2017",
     "module": "commonjs",
     "lib": ["dom", "es2017"],
@@ -20,5 +22,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "exclude": []
+  "include": [
+    "src/**/*",
+    "src/**/*.json"
+  ]
 }

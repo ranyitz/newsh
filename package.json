@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "tsc"
+  },
   "devDependencies": {
+    "@types/node": "^13.7.0",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "execa": "^4.0.0",
+    "tempy": "^0.3.0"
   }
 }
