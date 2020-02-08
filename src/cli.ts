@@ -12,7 +12,6 @@ const args = arg(
   {
     // Types
     "--file": [String],
-    "--shell": [String],
     "--help": Boolean,
     "--version": Boolean,
 
@@ -47,8 +46,8 @@ if (args["--version"]) {
   process.exit(0);
 }
 
-const files = args._;
-const scripts = args["--shell"];
+const files = args["--file"];
+const scripts = args._;
 
 if (files?.length === 0 && scripts?.length === 0) {
   console.error(error("please provide at least one file/script to run"));
