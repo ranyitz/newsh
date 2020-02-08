@@ -1,6 +1,5 @@
 import path from "path";
 import shell from "./shell";
-import launchTerminal from "./launchTerminal";
 
 export default function file(filePath: string): void {
   const absolutePath = path.join(process.cwd(), filePath);
@@ -8,13 +7,11 @@ export default function file(filePath: string): void {
 
   switch (extention) {
     case "":
-      launchTerminal(absolutePath);
+    case ".sh":
+      shell(`sh ${absolutePath}`);
       break;
     case ".js":
-      shell(`/usr/bin/env node ${absolutePath}`);
-      break;
-    case ".sh":
-      shell(`/usr/bin/env sh ${absolutePath}`);
+      shell(`node ${absolutePath}`);
       break;
     default:
       throw new Error(
