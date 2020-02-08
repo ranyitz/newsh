@@ -54,5 +54,5 @@ if (files?.length === 0 && scripts?.length === 0) {
   process.exit(1);
 }
 
-scripts?.forEach(shell);
+scripts?.forEach(script => shell(script));
 files?.forEach(launchFileInNewTerminal);
