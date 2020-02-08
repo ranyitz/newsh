@@ -10,7 +10,7 @@ export default function launchTerminal(execFilePath: string): void {
   const isLinux = /linux/.test(process.platform);
 
   if (isWindows) {
-    execa("cmd.exe", ["/C", execFilePath], {
+    execa.sync("cmd.exe", ["/C", execFilePath], {
       detached: true,
       stdio: "ignore"
     });
