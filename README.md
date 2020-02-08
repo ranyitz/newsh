@@ -2,6 +2,8 @@
 
 Open a new shell window
 
+> When you have many cli apps that takes the whole terminal, it's useful to run them all with a single command
+
 ![newshell](assets/newshell.gif)
 
 ## Features
