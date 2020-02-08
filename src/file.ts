@@ -7,13 +7,11 @@ export default function file(filePath: string): void {
 
   switch (extention) {
     case "":
+    case ".sh":
       shell(`sh ${absolutePath}`);
       break;
     case ".js":
       shell(`node ${absolutePath}`);
-      break;
-    case ".sh":
-      shell(`sh ${absolutePath}`);
       break;
     default:
       throw new Error(

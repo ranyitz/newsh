@@ -12,9 +12,12 @@ test("shell is running", async () => {
 
   const writeFileFuncPath = require.resolve("./utils/writeFile");
 
-  newshell.shell(
-    `__PATH__=${testFile} __DATA__=${testData} node ${writeFileFuncPath}`
-  );
+  newshell.shell(`node ${writeFileFuncPath}`, {
+    env: {
+      __PATH__: testFile,
+      __DATA__: testData
+    }
+  });
 
   await waitFor(() => pathExists(testFile), { timeout: 4000 });
 
@@ -28,8 +31,11 @@ test("shell is running a command in cwd", async () => {
 
   const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
-  newshell.shell(`__PATH__=${testFile} node ${writeCwdFuncPath}`);
-
+  newshell.shell(`node ${writeCwdFuncPath}`, {
+    env: {
+      __PATH__: testFile
+    }
+  });
   await waitFor(() => pathExists(testFile), { timeout: 4000 });
 
   const foundScriptCwd = fs.readFileSync(testFile, "utf-8");
