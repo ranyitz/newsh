@@ -5,7 +5,7 @@ import fs from "fs";
 import waitFor from "p-wait-for";
 import pathExists from "path-exists";
 
-test("shell", async () => {
+test("shell is running", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
   const testData = "foobar";
@@ -20,4 +20,19 @@ test("shell", async () => {
 
   const foundTestData = fs.readFileSync(testFile, "utf-8");
   expect(foundTestData).toBe(testData);
+});
+
+test("shell is running a command in cwd", async () => {
+  const testDir = tempy.directory();
+  const testFile = path.join(testDir, "test-file");
+
+  const writeCwdFuncPath = require.resolve("./utils/writeCwd");
+
+  newshell.shell(`__PATH__=${testFile} node ${writeCwdFuncPath}`);
+
+  await waitFor(() => pathExists(testFile), { timeout: 4000 });
+
+  const foundScriptCwd = fs.readFileSync(testFile, "utf-8");
+
+  expect(foundScriptCwd).toBe(process.cwd());
 });
