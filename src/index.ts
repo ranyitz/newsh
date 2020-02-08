@@ -1,2 +1,2 @@
-export { default as shell } from "./shell";
+export { default as command } from "./command";
 export { default as file } from "./file";

@@ -5,7 +5,7 @@ import launchTerminal from "./launchTerminal";
 
 type Options = { env: Record<string, string> };
 
-function shellWindows(script: string, options?: Options): void {
+function commandWindows(script: string, options?: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
 
   const environmentParams = [];
@@ -30,12 +30,12 @@ exit`;
   launchTerminal(launchFilePath);
 }
 
-export default function shell(script: string, options?: Options): void {
+export default function command(script: string, options?: Options): void {
   const isWindows = /^win/.test(process.platform);
   const cwd = process.cwd();
 
   if (isWindows) {
-    return shellWindows(script, options);
+    return commandWindows(script, options);
   }
 
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");

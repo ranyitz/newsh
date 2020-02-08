@@ -1,7 +1,7 @@
 import arg from "arg";
 import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
-import shell from "./shell";
+import command from "./command";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
@@ -54,5 +54,5 @@ if (files?.length === 0 && scripts?.length === 0) {
   process.exit(1);
 }
 
-scripts?.forEach(script => shell(script));
+scripts?.forEach(script => command(script));
 files?.forEach(launchFileInNewTerminal);

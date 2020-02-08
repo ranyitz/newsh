@@ -5,14 +5,14 @@ import fs from "fs";
 import waitFor from "p-wait-for";
 import pathExists from "path-exists";
 
-test("shell is running", async () => {
+test("command is running", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
   const testData = "foobar";
 
   const writeFileFuncPath = require.resolve("./utils/writeFile");
 
-  newshell.shell(`node ${writeFileFuncPath}`, {
+  newshell.command(`node ${writeFileFuncPath}`, {
     env: {
       __PATH__: testFile,
       __DATA__: testData
@@ -25,13 +25,13 @@ test("shell is running", async () => {
   expect(foundTestData).toBe(testData);
 });
 
-test("shell is running a command in cwd", async () => {
+test("command is running in the same cwd", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
 
   const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
-  newshell.shell(`node ${writeCwdFuncPath}`, {
+  newshell.command(`node ${writeCwdFuncPath}`, {
     env: {
       __PATH__: testFile
     }

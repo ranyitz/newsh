@@ -1,5 +1,5 @@
 import path from "path";
-import shell from "./shell";
+import command from "./command";
 
 export default function file(filePath: string): void {
   const absolutePath = path.join(process.cwd(), filePath);
@@ -8,10 +8,10 @@ export default function file(filePath: string): void {
   switch (extention) {
     case "":
     case ".sh":
-      shell(`sh ${absolutePath}`);
+      command(`sh ${absolutePath}`);
       break;
     case ".js":
-      shell(`node ${absolutePath}`);
+      command(`node ${absolutePath}`);
       break;
     default:
       throw new Error(
