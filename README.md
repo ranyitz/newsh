@@ -1,5 +1,3 @@
-<p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>
-
 <p align="center"><img src="assets/newshell.gif" width="90%"/></p>
 
 <h2 align="center">Open a new shell window</h2>
@@ -71,3 +69,5 @@ file(scriptPath: string): void
 
 - Run npm scripts in a new terminal (and resolve bins from the `node_modules/.bin` directory)
 - Manage IPC with the other terminal window (similar to `child_process.fork`)
+
+<p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>
