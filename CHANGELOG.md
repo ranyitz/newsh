@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4 (Feb 8, 2020)
+
+Publish only relevant files
+
 ## 0.0.3 (Feb 8, 2020)
 
 Rename `shell` to `command` in node API
