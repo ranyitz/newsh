@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/newshell.gif" width="90%"/></p>
 
-<h2 align="center">Open a new shell window</h2>
+<h2 align="center">Run a command in a new shell</h2>
 
 > When you have many cli apps that takes the whole terminal, it's useful to run them all with a single command
 
