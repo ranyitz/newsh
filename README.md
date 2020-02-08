@@ -2,6 +2,15 @@
 
 Open a new shell window
 
+![newshell](assets/newshell.gif)
+
+## Features
+
+- 👯‍♂️ Attempts to use the current terminal which is being used
+- 🌏 Cross platform
+- 📄 Runs js files with node
+- 🗃 Opens the new shell in current working directory
+
 ## CLI
 
 #### Run a command in a new shell
