@@ -47,7 +47,7 @@ export default function shell(script: string, options?: Options): void {
     const env = options.env;
 
     for (const paramKey in env) {
-      environmentParams.push(`${paramKey}=${env[paramKey]};`);
+      environmentParams.push(`${paramKey}=${env[paramKey]} `);
     }
   }
 
