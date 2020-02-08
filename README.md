@@ -1,10 +1,10 @@
-# newshell
+<p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>
 
-Open a new shell window
+<p align="center"><img src="assets/newshell.gif" width="90%"/></p>
+
+<h2 align="center">Open a new shell window</h2>
 
 > When you have many cli apps that takes the whole terminal, it's useful to run them all with a single command
-
-![newshell](assets/newshell.gif)
 
 ## Features
 
@@ -66,3 +66,8 @@ command(script: string): void
 ```ts
 file(scriptPath: string): void
 ```
+
+## Future
+
+- Run npm scripts in a new terminal (and resolve bins from the `node_modules/.bin` directory)
+- Manage IPC with the other terminal window (similar to `child_process.fork`)
