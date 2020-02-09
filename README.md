@@ -1,13 +1,13 @@
 <p align="center"><img src="assets/newshell.gif" width="90%"/></p>
 
-<h2 align="center">Run a command in a new shell</h2>
+<h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
 
 > When you have many cli apps that takes the whole terminal, it's useful to run them all with a single command
 
 ## Features
 
 - 👯‍♂️ Attempts to use the current terminal which is being used
-- 🌏 Cross platform
+- 🌏 cross-platform
 - 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
 
