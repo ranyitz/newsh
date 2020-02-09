@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0 (Feb 9, 2020)
+
+- [#2](https://github.com/ranyitz/newshell/pull/2) Support spliting (instead of opening new window/tab) with `iTerm2`
+
 ## 0.0.4 (Feb 8, 2020)
 
 Publish only relevant files
