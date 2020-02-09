@@ -2,6 +2,29 @@
   "name": "newshell",
   "version": "0.0.4",
   "main": "build/index.js",
+  "description": "cross-platform library to execute commands in a new shells",
+  "keywords": [
+    "new",
+    "shell",
+    "execute",
+    "exec",
+    "terminal",
+    "console",
+    "iterm2",
+    "iterm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ranyitz/newshell"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "author": {
+    "name": "Ran Yitzhaki",
+    "email": "ranyitz@gmail.com",
+    "url": "https://github.com/ranyitz"
+  },
   "license": "MIT",
   "bin": {
     "newshell": "bin/newshell.js"
