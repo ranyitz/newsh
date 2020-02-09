@@ -7,9 +7,10 @@
 ## Features
 
 - 👯‍♂️ Attempts to use the current terminal
-- 🌏 cross-platform
+- 🌏 Cross-platform
 - 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
+- 🎛 Supports spliting with `iterm2`
 
 ## CLI
 
