@@ -68,6 +68,7 @@ file(scriptPath: string): void
 ## Future
 
 - Run npm scripts in a new terminal (and resolve bins from the `node_modules/.bin` directory)
+- Be able to controll the focus of the terminal window
 - Manage IPC with the other terminal window (similar to `child_process.fork`)
 
 <p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>

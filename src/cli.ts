@@ -1,7 +1,7 @@
 import arg from "arg";
 import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
-import command from "./command";
+import command, { Options } from "./command";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
@@ -14,6 +14,9 @@ const args = arg(
     "--file": [String],
     "--help": Boolean,
     "--version": Boolean,
+    "--split": Boolean,
+    "--splitDirection": String,
+    "--terminalApp": String,
 
     // Aliases
     "-v": "--version",
@@ -28,12 +31,16 @@ const help = chalk`
   {bold USAGE}
     {bold $} {cyan newshell} --file path/to/script
     {bold $} {cyan newshell} "npx jest" && yarn start
+    {bold $} {cyan newshell} --split
     {bold $} {cyan newshell} --help
     {bold $} {cyan newshell} --version
   
   {bold OPTIONS}
-    -h, --help       Shows this help message
-    -v, --version    Displays the current version of newshell
+    -h, --help        Shows this help message
+    -v, --version     Displays the current version of newshell
+    --split           split the screen instead of opening a new one (iTerm2 only)
+    --splitDirection  Choose split direction (vertically|horizontally)
+    --terminalApp     Choose a specific terminal app to use (e.g. iTerm.app)
 `;
 
 if (args["--help"]) {
@@ -54,5 +61,12 @@ if (files?.length === 0 && scripts?.length === 0) {
   process.exit(1);
 }
 
-scripts?.forEach(script => command(script));
+const cliOptions: Options = {
+  env: {},
+  split: args["--split"],
+  splitDirection: args["--splitDirection"],
+  terminalApp: args["--terminalApp"]
+};
+
+scripts?.forEach(script => command(script, cliOptions));
 files?.forEach(launchFileInNewTerminal);
