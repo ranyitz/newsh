@@ -36,7 +36,29 @@ newshell pwd
 newshell "npx tsc --watch" "npx jest --watch"
 ```
 
+### --split
+
+Split the screen instead of opening a new tab/window
+
+> Only works if you're using iterm2
+
+```sh
+newshell --split "echo hello"
+```
+
+### --splitDirection
+
+Choose split direction (`vertically`/`horizontally`)
+
+> defaults to `vertically`
+
+### --terminalApp
+
+Choose a specific terminal app to use (e.g. `iTerm.app`)
+
 ### --file
+
+Executes a file in a new shell
 
 ```sh
 newshell --file "./script.sh"
