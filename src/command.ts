@@ -2,17 +2,30 @@ import path from "path";
 import tempy from "tempy";
 import fs from "fs";
 import launchTerminal from "./launchTerminal";
+import { detectTerminalApp } from "./utils";
+import merge from "lodash.merge";
 
-type Options = { env: Record<string, string> };
+export type Options = {
+  env?: Record<string, string>;
+  split?: boolean;
+  splitDirection?: string;
+  terminalApp?: string | undefined;
+};
 
-function commandWindows(script: string, options?: Options): void {
+const defaultOptions: Options = {
+  env: {},
+  split: false,
+  splitDirection: "vertically",
+  terminalApp: detectTerminalApp()
+};
+
+function commandWindows(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
 
   const environmentParams = [];
+  const { env } = options;
 
-  if (options?.env) {
-    const env = options.env;
-
+  if (env) {
     for (const paramKey in env) {
       environmentParams.push(`set ${paramKey}=${env[paramKey]}`);
     }
@@ -27,29 +40,23 @@ exit`;
 
   fs.writeFileSync(launchFilePath, batFile);
   fs.chmodSync(launchFilePath, 0o751);
-  launchTerminal(launchFilePath);
+
+  launchTerminal(launchFilePath, options);
 }
 
-export default function command(script: string, options?: Options): void {
-  const isWindows = /^win/.test(process.platform);
-  const cwd = process.cwd();
-
-  if (isWindows) {
-    return commandWindows(script, options);
-  }
-
+function commandUnix(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");
-  const moveToDirCommand = `cd ${cwd};`;
 
   const environmentParams = [];
+  const { env } = options;
 
-  if (options?.env) {
-    const env = options.env;
-
+  if (env) {
     for (const paramKey in env) {
       environmentParams.push(`${paramKey}=${env[paramKey]} `);
     }
   }
+
+  const moveToDirCommand = `cd ${process.cwd()};`;
 
   const scriptWithMovePrefix =
     moveToDirCommand + environmentParams.join("") + script;
@@ -59,5 +66,17 @@ export default function command(script: string, options?: Options): void {
   // add execute permissions (-rwxr-xr-x)
   fs.chmodSync(launchFilePath, 0o751);
 
-  launchTerminal(launchFilePath);
+  launchTerminal(launchFilePath, options);
+}
+
+export default function command(script: string, options?: Options): void {
+  const optionsWithDefaults = merge(defaultOptions, options);
+
+  const isWindows = /^win/.test(process.platform);
+
+  if (!isWindows) {
+    commandUnix(script, optionsWithDefaults);
+  } else {
+    commandWindows(script, optionsWithDefaults);
+  }
 }

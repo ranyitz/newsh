@@ -54,12 +54,21 @@ newshell --file "./script.js"
 > has the same capabilities of the cli
 
 ```ts
-command(script: string): void
+command(script: string, options: Options): void
 ```
 
-> similar to --file
+```ts
+type Options = {
+  env?: Record<string, string> = {};
+  split?: boolean = false;
+  splitDirection?: string = "verticaly";
+  terminalApp?: string | undefined = $TERM_PROGRAM;
+};
+```
 
 ### file
+
+> similar to --file
 
 ```ts
 file(scriptPath: string): void
@@ -68,6 +77,8 @@ file(scriptPath: string): void
 ## Future
 
 - Run npm scripts in a new terminal (and resolve bins from the `node_modules/.bin` directory)
+- Controll the focus of the terminal window
+- Pass environment parameters from the CLI
 - Manage IPC with the other terminal window (similar to `child_process.fork`)
 
 <p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>
