@@ -6,7 +6,7 @@
 
 ## Features
 
-- 👯‍♂️ Attempts to use the current terminal which is being used
+- 👯‍♂️ Attempts to use the current terminal
 - 🌏 cross-platform
 - 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
