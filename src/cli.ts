@@ -1,12 +1,21 @@
 import arg from "arg";
 import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
-import command, { Options } from "./command";
+import command from "./command";
+import normalize from "./normalize";
+
+export type InitialOptions = {
+  env?: Record<string, string>;
+  split?: boolean;
+  splitDirection?: string;
+  terminalApp?: string;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
 
-const error = (message: string): string => chalk`{red ERROR:} ${message}`;
+export const error = (message: string): string =>
+  chalk`{red ERROR:} ${message}`;
 
 const args = arg(
   {
@@ -62,12 +71,14 @@ if ((!files || files?.length === 0) && (!scripts || scripts?.length === 0)) {
   process.exit(1);
 }
 
-const cliOptions: Options = {
+const cliOptions: InitialOptions = {
   env: {},
   split: !!args["--splitDirection"] || args["--split"],
   splitDirection: args["--splitDirection"],
   terminalApp: args["--terminalApp"]
 };
 
-scripts?.forEach(script => command(script, cliOptions));
-files?.forEach(launchFileInNewTerminal);
+const options = normalize(cliOptions);
+
+scripts?.forEach(script => command(script, options));
+files?.forEach(filePath => launchFileInNewTerminal(filePath, options));

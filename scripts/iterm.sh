@@ -1,14 +1,14 @@
 CMD=""
 WD="$PWD"
-args="$@"
+ARGS="$@"
 
 if [ -d "$1" ]; then
     WD="$1"
-    args="${@:2}"
+    ARGS="${@:2}"
 fi
 
-if [ -n "$args" ]; then
-    CMD="$args"
+if [ -n "$ARGS" ]; then
+    CMD="$ARGS"
 fi
 
     osascript <<EOF
