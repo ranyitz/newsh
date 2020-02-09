@@ -29,15 +29,16 @@ const help = chalk`
   {bold.magenta newshell} - Running files/scripts in a new shell
   
   {bold USAGE}
-    {bold $} {cyan newshell} --file path/to/script
     {bold $} {cyan newshell} "npx jest" && yarn start
-    {bold $} {cyan newshell} --split
+    {bold $} {cyan newshell} --file path/to/script
+    {bold $} {cyan newshell} --split "npx tsc --watch"
     {bold $} {cyan newshell} --help
     {bold $} {cyan newshell} --version
   
   {bold OPTIONS}
     -h, --help        Shows this help message
     -v, --version     Displays the current version of newshell
+    
     --split           split the screen instead of opening a new one (iTerm2 only)
     --splitDirection  Choose split direction (vertically|horizontally)
     --terminalApp     Choose a specific terminal app to use (e.g. iTerm.app)
