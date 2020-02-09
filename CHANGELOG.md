@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 (Feb 9, 2020)
+
+Rename into `newsh` 🐚
+
 ## 0.1.0 (Feb 9, 2020)
 
 - [#2](https://github.com/ranyitz/newsh/pull/2) Support spliting (instead of opening new window/tab) with `iTerm2`
