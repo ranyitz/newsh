@@ -25,6 +25,7 @@
   "files": [
     "build",
     "bin",
+    "scripts",
     "src"
   ],
   "devDependencies": {
