@@ -26,19 +26,19 @@ const args = arg(
 );
 
 const help = chalk`
-  {bold.magenta newshell} - Running files/scripts in a new shell
+  {bold.magenta newsh} - Running files/scripts in a new shell
   
   {bold USAGE}
-    {bold $} {cyan newshell} "npx jest" && yarn start
-    {bold $} {cyan newshell} --file path/to/script
-    {bold $} {cyan newshell} --split "npx tsc --watch"
-    {bold $} {cyan newshell} --help
-    {bold $} {cyan newshell} --version
+    {bold $} {cyan newsh} "npx jest" && yarn start
+    {bold $} {cyan newsh} --file path/to/script
+    {bold $} {cyan newsh} --split "npx tsc --watch"
+    {bold $} {cyan newsh} --help
+    {bold $} {cyan newsh} --version
   
   {bold OPTIONS}
     -h, --help        Shows this help message
-    -v, --version     Displays the current version of newshell
-    
+    -v, --version     Displays the current version of newsh
+
     --split           split the screen instead of opening a new one (iTerm2 only)
     --splitDirection  Choose split direction (vertically|horizontally)
     --terminalApp     Choose a specific terminal app to use (e.g. iTerm.app)
@@ -57,14 +57,14 @@ if (args["--version"]) {
 const files = args["--file"];
 const scripts = args._;
 
-if (files?.length === 0 && scripts?.length === 0) {
-  console.error(error("please provide at least one file/script to run"));
+if ((!files || files?.length === 0) && (!scripts || scripts?.length === 0)) {
+  console.error(error("please provide a file/command to run"));
   process.exit(1);
 }
 
 const cliOptions: Options = {
   env: {},
-  split: args["--split"],
+  split: !!args["--splitDirection"] || args["--split"],
   splitDirection: args["--splitDirection"],
   terminalApp: args["--terminalApp"]
 };

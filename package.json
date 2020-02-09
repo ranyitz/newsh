@@ -1,5 +1,5 @@
 {
-  "name": "newshell",
+  "name": "newsh",
   "version": "0.1.0",
   "main": "build/index.js",
   "description": "cross-platform library to execute commands in a new shells",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ranyitz/newshell"
+    "url": "https://github.com/ranyitz/newsh"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "bin": {
-    "newshell": "bin/newshell.js"
+    "newsh": "bin/newsh.js"
   },
   "scripts": {
     "build": "tsc",

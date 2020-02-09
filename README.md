@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/newshell.gif" width="90%"/></p>
+<p align="center"><img src="assets/newsh.gif" width="90%"/></p>
 
 <h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
 
@@ -19,7 +19,7 @@
 > prints "hello world" in a new shell window
 
 ```sh
-newshell "echo 'hello world'"
+newsh "echo 'hello world'"
 ```
 
 > The new shell will run in the same working directory.
@@ -27,13 +27,13 @@ newshell "echo 'hello world'"
 ```sh
 # See for yourself 👀
 
-newshell pwd
+newsh pwd
 ```
 
 > You can run multiple shells
 
 ```sh
-newshell "npx tsc --watch" "npx jest --watch"
+newsh "npx tsc --watch" "npx jest --watch"
 ```
 
 ### --split
@@ -43,7 +43,7 @@ Split the screen instead of opening a new tab/window
 > Only works if you're using iterm2
 
 ```sh
-newshell --split "echo hello"
+newsh --split "echo hello"
 ```
 
 ### --splitDirection
@@ -61,13 +61,13 @@ Choose a specific terminal app to use (e.g. `iTerm.app`)
 Executes a file in a new shell
 
 ```sh
-newshell --file "./script.sh"
+newsh --file "./script.sh"
 ```
 
 > Supports running node for javascript files
 
 ```sh
-newshell --file "./script.js"
+newsh --file "./script.js"
 ```
 
 ## Node API
@@ -104,4 +104,4 @@ file(scriptPath: string): void
 - Pass environment parameters from the CLI
 - Manage IPC with the other terminal window (similar to `child_process.fork`)
 
-<p align="left"><img src="https://github.com/ranyitz/newshell/workflows/CI/badge.svg" alt="CI"/><p/>
+<p align="left"><img src="https://github.com/ranyitz/newsh/workflows/CI/badge.svg" alt="CI"/><p/>

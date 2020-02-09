@@ -1,4 +1,4 @@
-import * as newshell from "../";
+import * as newsh from "../";
 import tempy from "tempy";
 import path from "path";
 import fs from "fs";
@@ -12,7 +12,7 @@ test("command is running", async () => {
 
   const writeFileFuncPath = require.resolve("./utils/writeFile");
 
-  newshell.command(`node ${writeFileFuncPath}`, {
+  newsh.command(`node ${writeFileFuncPath}`, {
     env: {
       __PATH__: testFile,
       __DATA__: testData
@@ -31,7 +31,7 @@ test("command is running in the same cwd", async () => {
 
   const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
-  newshell.command(`node ${writeCwdFuncPath}`, {
+  newsh.command(`node ${writeCwdFuncPath}`, {
     env: {
       __PATH__: testFile
     }
