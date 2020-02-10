@@ -1,12 +1,17 @@
 # Changelog
 
+## 0.4.1 (Feb 11, 2020)
+
+- Added support for multiple cases of iTerm app name
+- Fix a bug when using split without `iterm`/`tmux`
+- [#7](https://github.com/ranyitz/newsh/pull/7) Improve tests coverage and infra
+
 ## 0.4.0 (Feb 10, 2020)
 
 - [#6](https://github.com/ranyitz/newsh/pull/6) Add tests for `file` and `CLI`
-
-* Added support for absolute path in `file` method
-* Pass environment parameters to the new shell instance
-* Added [${version}] to the help page
+- Added support for absolute path in `file` method
+- Pass environment parameters to the new shell instance
+- Added [${version}] to the help page
 
 ## 0.3.0 (Feb 10, 2020)
 
