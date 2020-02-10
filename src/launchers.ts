@@ -1,6 +1,6 @@
 import execa from "execa";
 import path from "path";
-import { Options } from "./command";
+import { Options } from "./normalize";
 
 export const windows = (execFilePath: string): void => {
   execa.sync("cmd.exe", ["/C", execFilePath], {
@@ -36,5 +36,24 @@ export const iterm = (execFilePath: string, options: Options): void => {
     return;
   } catch (error) {
     mac(execFilePath, options);
+  }
+};
+
+export const tmux = (execFilePath: string, options: Options): void => {
+  try {
+    const tmuxSplitDirection =
+      options.splitDirection === "vertically" ? "h" : "v";
+
+    execa.sync(path.join(__dirname, "../scripts/tmux.sh"), [execFilePath], {
+      ...options.env,
+      env: { SPLIT_DIRECTION: tmuxSplitDirection }
+    });
+    return;
+  } catch (error) {
+    if (options.terminalApp === "iTerm.app") {
+      iterm(execFilePath, options);
+    } else {
+      mac(execFilePath, options);
+    }
   }
 };

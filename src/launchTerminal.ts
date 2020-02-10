@@ -1,32 +1,32 @@
-import { linux, mac, windows, iterm } from "./launchers";
-import { Options } from ".//command";
+import { linux, mac, windows, iterm, tmux } from "./launchers";
+import { Options } from "./normalize";
 
 export default function launchTerminal(
   execFilePath: string,
   options: Options
 ): void {
+  const { split, terminalApp } = options;
+
   const platform = process.platform;
   const isWindows = /^win/.test(platform);
   const isMac = /darwin/.test(platform);
   const isLinux = /linux/.test(platform);
-
-  const { split, terminalApp } = options;
+  const isIterm = terminalApp === "iTerm.app";
+  const isTmux = !!process.env.TMUX_PANE;
 
   let launcher;
 
-  if (isMac) {
-    if (split && terminalApp === "iTerm.app") {
+  if (split) {
+    if (isTmux) {
+      launcher = tmux;
+    } else if (isIterm) {
       launcher = iterm;
-    } else {
-      launcher = mac;
     }
-  }
-
-  if (isWindows) {
+  } else if (isMac) {
+    launcher = mac;
+  } else if (isWindows) {
     launcher = windows;
-  }
-
-  if (isLinux) {
+  } else if (isLinux) {
     launcher = linux;
   }
 

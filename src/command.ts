@@ -2,22 +2,7 @@ import path from "path";
 import tempy from "tempy";
 import fs from "fs";
 import launchTerminal from "./launchTerminal";
-import { detectTerminalApp } from "./utils";
-import merge from "lodash.merge";
-
-export type Options = {
-  env?: Record<string, string>;
-  split?: boolean;
-  splitDirection?: string;
-  terminalApp?: string | undefined;
-};
-
-const defaultOptions: Options = {
-  env: {},
-  split: false,
-  splitDirection: "vertically",
-  terminalApp: detectTerminalApp()
-};
+import { Options } from "./normalize";
 
 function commandWindows(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
@@ -69,14 +54,12 @@ function commandUnix(script: string, options: Options): void {
   launchTerminal(launchFilePath, options);
 }
 
-export default function command(script: string, options?: Options): void {
-  const optionsWithDefaults = merge(defaultOptions, options);
-
+export default function command(script: string, options: Options): void {
   const isWindows = /^win/.test(process.platform);
 
   if (!isWindows) {
-    commandUnix(script, optionsWithDefaults);
+    commandUnix(script, options);
   } else {
-    commandWindows(script, optionsWithDefaults);
+    commandWindows(script, options);
   }
 }
