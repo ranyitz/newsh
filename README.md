@@ -1,3 +1,11 @@
+<p align=center>
+  <img src="https://img.shields.io/badge/cross--platform-windows%20%7C%20macos%20%7C%20linux-yellow" alt="size"/>
+  <img src="https://img.shields.io/github/languages/top/ranyitz/newsh" alt="size"/>
+  <img src="https://img.shields.io/npm/v/newsh" alt="version"/>
+  <img src="https://img.shields.io/github/license/ranyitz/newsh" alt="license"/>
+  <img src="https://badgen.net/bundlephobia/minzip/newsh" alt="size"/>
+  <img src="https://github.com/ranyitz/newsh/workflows/CI/badge.svg" alt="CI"/>
+</p>
 <p align="center"><img src="assets/newsh.gif" width="90%"/></p>
 
 <h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
@@ -109,5 +117,3 @@ file(scriptPath: string, options: Options): void
 - Controll the focus of the terminal window
 - Pass environment parameters from the CLI
 - Manage IPC with the other terminal window (similar to `child_process.fork`)
-
-<p align="left"><img src="https://github.com/ranyitz/newsh/workflows/CI/badge.svg" alt="CI"/><p/>
