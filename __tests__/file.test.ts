@@ -9,9 +9,11 @@ test("file is running", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
   const testData = "foobar";
+  const writeFileFuncPath = require.resolve("./utils/writeFile");
 
   newsh.file(path.join(__dirname, "./fixtures/writeFile"), {
     env: {
+      __WRITE_FILE_JS__: writeFileFuncPath,
       __PATH__: testFile,
       __DATA__: testData
     }

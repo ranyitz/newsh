@@ -1,2 +1,1 @@
-__dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-node "${__dirname}/../utils/writeFile.js"
+node $__WRITE_FILE_JS__
