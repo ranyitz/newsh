@@ -1,13 +1,9 @@
-import { linux, mac, windows, iterm, tmux } from "./launchers";
+import { linux, mac, windows, iterm, tmux, Launcher } from "./launchers";
 import { Options } from "./normalize";
 import { ErrorMessage } from "./utils";
 
-export default function launchTerminal(
-  execFilePath: string,
-  options: Options
-): void {
+function chooseLauncher(options: Options): Launcher {
   const { split, terminalApp } = options;
-
   const platform = process.platform;
   const isWindows = /^win/.test(platform);
   const isMac = /darwin/.test(platform);
@@ -15,25 +11,36 @@ export default function launchTerminal(
   const isIterm = terminalApp === "iTerm.app";
   const isTmux = !!process.env.TMUX_PANE;
 
-  let launcher;
-
   if (split) {
     if (isTmux) {
-      launcher = tmux;
-    } else if (isIterm) {
-      launcher = iterm;
+      return tmux;
     }
-  } else if (isMac) {
-    launcher = mac;
-  } else if (isWindows) {
-    launcher = windows;
-  } else if (isLinux) {
-    launcher = linux;
+
+    if (isIterm) {
+      return iterm;
+    }
   }
 
-  if (!launcher) {
-    throw new ErrorMessage(`Could not recognize the OS ${platform}`);
+  if (isMac) {
+    return mac;
   }
+
+  if (isWindows) {
+    return windows;
+  }
+
+  if (isLinux) {
+    return linux;
+  }
+
+  throw new ErrorMessage(`Could not recognize the OS ${platform}`);
+}
+
+export default function launchTerminal(
+  execFilePath: string,
+  options: Options
+): void {
+  const launcher = chooseLauncher(options);
 
   launcher(execFilePath, options);
 }

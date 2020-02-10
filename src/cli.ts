@@ -1,4 +1,8 @@
 process.on("uncaughtException", error => {
+  if (process.env.DEBUG === "true") {
+    throw error;
+  }
+
   console.error(error.message);
 });
 

@@ -31,9 +31,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch",
+    "watch": "newsh --split 'tsc --watch'",
     "lint": "eslint '*/**/*.{js,ts}'",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "newsh 'jest --watch'"
   },
   "husky": {
     "hooks": {
