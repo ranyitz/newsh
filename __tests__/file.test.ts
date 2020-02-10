@@ -4,14 +4,14 @@ import path from "path";
 import fs from "fs";
 import waitFor from "p-wait-for";
 import pathExists from "path-exists";
+import { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
 const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
 describe("file", () => {
   test("no extension", async () => {
-    const testDir = tempy.directory();
-    const testFile = path.join(testDir, "test-file");
+    const testFile = tempy.file();
     const testData = "foobar";
 
     newsh.file(path.join(__dirname, "./fixtures/writeFile"), {
@@ -22,15 +22,12 @@ describe("file", () => {
       }
     });
 
-    await waitFor(() => pathExists(testFile), { timeout: 4000 });
-
-    const foundTestData = fs.readFileSync(testFile, "utf-8");
-    expect(foundTestData).toBe(testData);
+    await waitForFile(testFile);
+    expect(readFile(testFile)).toBe(testData);
   });
 
   test(".sh", async () => {
-    const testDir = tempy.directory();
-    const testFile = path.join(testDir, "test-file");
+    const testFile = tempy.file();
     const testData = "foobar";
 
     newsh.file(path.join(__dirname, "./fixtures/writeFile.sh"), {
@@ -41,15 +38,12 @@ describe("file", () => {
       }
     });
 
-    await waitFor(() => pathExists(testFile), { timeout: 4000 });
-
-    const foundTestData = fs.readFileSync(testFile, "utf-8");
-    expect(foundTestData).toBe(testData);
+    await waitForFile(testFile);
+    expect(readFile(testFile)).toBe(testData);
   });
 
   test(".js", async () => {
-    const testDir = tempy.directory();
-    const testFile = path.join(testDir, "test-file");
+    const testFile = tempy.file();
     const testData = "foobar";
 
     newsh.file(writeFileFuncPath, {
@@ -59,15 +53,12 @@ describe("file", () => {
       }
     });
 
-    await waitFor(() => pathExists(testFile), { timeout: 4000 });
-
-    const foundTestData = fs.readFileSync(testFile, "utf-8");
-    expect(foundTestData).toBe(testData);
+    await waitForFile(testFile);
+    expect(readFile(testFile)).toBe(testData);
   });
 
   test("running in the same cwd", async () => {
-    const testDir = tempy.directory();
-    const testFile = path.join(testDir, "test-file");
+    const testFile = tempy.file();
 
     newsh.file(writeCwdFuncPath, {
       env: {
@@ -75,10 +66,7 @@ describe("file", () => {
       }
     });
 
-    await waitFor(() => pathExists(testFile), { timeout: 4000 });
-
-    const foundScriptCwd = fs.readFileSync(testFile, "utf-8");
-
-    expect(foundScriptCwd).toBe(process.cwd());
+    await waitForFile(testFile);
+    expect(readFile(testFile)).toBe(process.cwd());
   });
 });

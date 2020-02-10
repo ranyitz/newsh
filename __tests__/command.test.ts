@@ -1,16 +1,12 @@
 import * as newsh from "../";
 import tempy from "tempy";
-import path from "path";
-import fs from "fs";
-import waitFor from "p-wait-for";
-import pathExists from "path-exists";
+import { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
 const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
 test("command is running", async () => {
-  const testDir = tempy.directory();
-  const testFile = path.join(testDir, "test-file");
+  const testFile = tempy.file();
   const testData = "foobar";
 
   newsh.command(`node ${writeFileFuncPath}`, {
@@ -20,24 +16,20 @@ test("command is running", async () => {
     }
   });
 
-  await waitFor(() => pathExists(testFile), { timeout: 4000 });
-
-  const foundTestData = fs.readFileSync(testFile, "utf-8");
-  expect(foundTestData).toBe(testData);
+  await waitForFile(testFile);
+  expect(readFile(testFile)).toBe(testData);
 });
 
 test("command is running in the same cwd", async () => {
-  const testDir = tempy.directory();
-  const testFile = path.join(testDir, "test-file");
+  const testFile = tempy.file();
 
   newsh.command(`node ${writeCwdFuncPath}`, {
     env: {
       __PATH__: testFile
     }
   });
-  await waitFor(() => pathExists(testFile), { timeout: 4000 });
 
-  const foundScriptCwd = fs.readFileSync(testFile, "utf-8");
+  await waitForFile(testFile);
 
-  expect(foundScriptCwd).toBe(process.cwd());
+  expect(readFile(testFile)).toBe(process.cwd());
 });

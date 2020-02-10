@@ -1,26 +1,72 @@
 import tempy from "tempy";
-import path from "path";
-import fs from "fs";
-import waitFor from "p-wait-for";
-import pathExists from "path-exists";
-import runNewsh from "./utils/runNewsh";
+import runNewsh, { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
 
-test("cli", async () => {
-  const testDir = tempy.directory();
-  const testFile = path.join(testDir, "test-file");
-  const testData = "foobar";
+describe("cli", () => {
+  test("command", async () => {
+    const testFile = tempy.file();
+    const testData = "foobar";
 
-  await runNewsh([`node ${writeFileFuncPath}`], {
-    env: {
-      __PATH__: testFile,
-      __DATA__: testData
-    }
+    const child = await runNewsh([`node ${writeFileFuncPath}`], {
+      env: {
+        __PATH__: testFile,
+        __DATA__: testData
+      }
+    });
+
+    await waitForFile(testFile, child);
+
+    expect(readFile(testFile)).toBe(testData);
   });
 
-  await waitFor(() => pathExists(testFile), { timeout: 4000 });
+  test("file", async () => {
+    const testFile = tempy.file();
+    const testData = "foobar";
 
-  const foundTestData = fs.readFileSync(testFile, "utf-8");
-  expect(foundTestData).toBe(testData);
+    const child = await runNewsh(["--file", writeFileFuncPath], {
+      env: {
+        __PATH__: testFile,
+        __DATA__: testData
+      }
+    });
+
+    await waitForFile(testFile, child);
+
+    expect(readFile(testFile)).toBe(testData);
+  });
+
+  test("split", async () => {
+    const testFile = tempy.file();
+    const testData = "foobar";
+
+    const child = await runNewsh(["--split", `node ${writeFileFuncPath}`], {
+      env: {
+        __PATH__: testFile,
+        __DATA__: testData
+      }
+    });
+
+    await waitForFile(testFile, child);
+
+    expect(readFile(testFile)).toBe(testData);
+  });
+
+  test("split horizontally", async () => {
+    const testFile = tempy.file();
+    const testData = "foobar";
+
+    const child = await runNewsh(
+      ["--split-horizontally", `node ${writeFileFuncPath}`],
+      {
+        env: {
+          __PATH__: testFile,
+          __DATA__: testData
+        }
+      }
+    );
+
+    await waitForFile(testFile, child);
+    expect(readFile(testFile)).toBe(testData);
+  });
 });
