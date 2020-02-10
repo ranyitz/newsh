@@ -1,6 +1,6 @@
 import { linux, mac, windows, iterm, tmux } from "./launchers";
 import { Options } from "./normalize";
-import { error } from "./cli";
+import { ErrorMessage } from "./utils";
 
 export default function launchTerminal(
   execFilePath: string,
@@ -31,9 +31,9 @@ export default function launchTerminal(
     launcher = linux;
   }
 
-  if (launcher) {
-    launcher(execFilePath, options);
-  } else {
-    error(`Could not recognize the OS ${platform}`);
+  if (!launcher) {
+    throw new ErrorMessage(`Could not recognize the OS ${platform}`);
   }
+
+  launcher(execFilePath, options);
 }

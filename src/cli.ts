@@ -1,8 +1,13 @@
+process.on("uncaughtException", error => {
+  console.error(error.message);
+});
+
 import arg from "arg";
 import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
 import command from "./command";
 import normalize from "./normalize";
+import { ErrorMessage } from "./utils";
 
 export type InitialOptions = {
   env: Record<string, string>;
@@ -13,11 +18,6 @@ export type InitialOptions = {
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require("../package.json");
-
-export const error = (message: string): string => {
-  console.error(chalk`{red ERROR:} ${message}`);
-  process.exit(1);
-};
 
 const args = arg(
   {
@@ -72,7 +72,7 @@ const files = args["--file"];
 const scripts = args._;
 
 if ((!files || files?.length === 0) && (!scripts || scripts?.length === 0)) {
-  error("please provide a file/command to run");
+  throw new ErrorMessage("please provide a file/command to run");
 }
 
 const splitDirection = args["--split-vertically"]
