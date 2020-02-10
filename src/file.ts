@@ -1,6 +1,7 @@
 import path from "path";
 import command from "./command";
 import { Options } from "./normalize";
+import { error } from "./cli";
 
 export default function file(filePath: string, options: Options): void {
   const absolutePath = path.join(process.cwd(), filePath);
@@ -15,8 +16,6 @@ export default function file(filePath: string, options: Options): void {
       command(`node ${absolutePath}`, options);
       break;
     default:
-      throw new Error(
-        `extension ${extention} of file ${absolutePath} is not supported`
-      );
+      error(`extension ${extention} of file ${absolutePath} is not supported`);
   }
 }
