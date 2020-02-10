@@ -6,7 +6,7 @@
   <img src="https://badgen.net/bundlephobia/minzip/newsh" alt="size"/>
   <img src="https://github.com/ranyitz/newsh/workflows/CI/badge.svg" alt="CI"/>
 </p>
-<p align="center"><img src="assets/newsh-tmux.gif" width="90%"/></p>
+<p align="center"><img src="assets/newsh-iterm.gif" width="90%"/></p>
 
 <h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
 
@@ -43,6 +43,8 @@ newsh pwd
 ```sh
 newsh "npx tsc --watch" "npx jest --watch"
 ```
+
+<p align="center"><img src="assets/newsh-tmux.gif" width="94%"/></p>
 
 ### --split-horizontally
 
