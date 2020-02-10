@@ -10,7 +10,7 @@
 - 🌏 Cross-platform
 - 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
-- 🎛 Supports spliting with `iterm2`
+- 🎛 Supports spliting with `iterm2` & `tmux`
 
 ## CLI
 
@@ -36,21 +36,25 @@ newsh pwd
 newsh "npx tsc --watch" "npx jest --watch"
 ```
 
-### --split
+### --split-horizontally
 
-Split the screen instead of opening a new tab/window
-
-> Only works if you're using iterm2
+Attempts to split the screen horizontally instead of opening a new tab/window
 
 ```sh
-newsh --split "echo hello"
+newsh --split-horizontally "echo hello"
 ```
 
-### --splitDirection
+### --split-vertically
 
-Choose split direction (`vertically`/`horizontally`)
+Attempts to split the screen vertically instead of opening a new tab/window
 
-> defaults to `vertically`
+```sh
+newsh --split-vertically "echo hello"
+```
+
+### --split
+
+Alias for `--split-vertically`
 
 ### --terminalApp
 
@@ -72,29 +76,31 @@ newsh --file "./script.js"
 
 ## Node API
 
-### command
-
-> has the same capabilities of the cli
-
-```ts
-command(script: string, options: Options): void
-```
+> possible options for the command and file methods
 
 ```ts
 type Options = {
   env?: Record<string, string> = {};
   split?: boolean = false;
-  splitDirection?: string = "verticaly";
+  splitDirection?: "vertically" | "horizontally" = "vertically";
   terminalApp?: string | undefined = $TERM_PROGRAM;
 };
 ```
 
-### file
+### command
 
-> similar to --file
+> Run a command in a new shell
 
 ```ts
-file(scriptPath: string): void
+command(script: string, options: Options): void
+```
+
+### file
+
+> Executes a file in a new shell
+
+```ts
+file(scriptPath: string, options: Options): void
 ```
 
 ## Future
