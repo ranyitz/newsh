@@ -5,12 +5,13 @@ import fs from "fs";
 import waitFor from "p-wait-for";
 import pathExists from "path-exists";
 
+const writeFileFuncPath = require.resolve("./utils/writeFile");
+const writeCwdFuncPath = require.resolve("./utils/writeCwd");
+
 test("command is running", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
   const testData = "foobar";
-
-  const writeFileFuncPath = require.resolve("./utils/writeFile");
 
   newsh.command(`node ${writeFileFuncPath}`, {
     env: {
@@ -28,8 +29,6 @@ test("command is running", async () => {
 test("command is running in the same cwd", async () => {
   const testDir = tempy.directory();
   const testFile = path.join(testDir, "test-file");
-
-  const writeCwdFuncPath = require.resolve("./utils/writeCwd");
 
   newsh.command(`node ${writeCwdFuncPath}`, {
     env: {

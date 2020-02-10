@@ -10,7 +10,7 @@ import normalize from "./normalize";
 import { ErrorMessage } from "./utils";
 
 export type InitialOptions = {
-  env: Record<string, string>;
+  env: NodeJS.ProcessEnv;
   splitDirection: string | undefined;
   split: boolean | undefined;
   terminalApp: string | undefined;
@@ -38,8 +38,8 @@ const args = arg(
 );
 
 const help = chalk`
-  {bold.magenta newsh} - Running files/scripts in a new shell
-  
+  {bold.magenta newsh} - [${pkg.version}] Running files/scripts in a new shell
+
   {bold USAGE}
     {bold $} {cyan newsh} "npx jest --watch" && yarn start
     {bold $} {cyan newsh} --file path/to/script

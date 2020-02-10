@@ -3,7 +3,7 @@ import command from "./command";
 import { Options } from "./normalize";
 import { ErrorMessage } from "./utils";
 
-export default function file(filePath: string, options: Options): void {
+export default function file(filePath: string, options: Options = {}): void {
   if (!path.isAbsolute(filePath)) {
     filePath = path.join(process.cwd(), filePath);
   }
