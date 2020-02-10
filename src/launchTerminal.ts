@@ -8,7 +8,10 @@ function chooseLauncher(options: Options): Launcher {
   const isWindows = /^win/.test(platform);
   const isMac = /darwin/.test(platform);
   const isLinux = /linux/.test(platform);
-  const isIterm = terminalApp === "iTerm.app";
+  const isIterm = ["iTerm", "iTerm.app", "iTerm2", "iTerm2.app"].includes(
+    terminalApp!
+  );
+
   const isTmux = !!process.env.TMUX_PANE;
 
   if (split) {
