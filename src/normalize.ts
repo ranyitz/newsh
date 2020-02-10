@@ -3,14 +3,14 @@ import merge from "lodash.merge";
 import { detectTerminalApp } from "./utils";
 
 export type Options = {
-  env?: Record<string, string>;
+  env?: NodeJS.ProcessEnv;
   split?: boolean;
   splitDirection?: "vertically" | "horizontally";
   terminalApp?: string;
 };
 
 const defaultOptions: InitialOptions = {
-  env: {},
+  env: process.env,
   split: false,
   splitDirection: "vertically",
   terminalApp: detectTerminalApp()

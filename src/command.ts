@@ -37,7 +37,9 @@ function commandUnix(script: string, options: Options): void {
 
   if (env) {
     for (const paramKey in env) {
-      environmentParams.push(`${paramKey}=${env[paramKey]} `);
+      if (env[paramKey]) {
+        environmentParams.push(`${paramKey}="${env[paramKey]}" `);
+      }
     }
   }
 
@@ -54,7 +56,7 @@ function commandUnix(script: string, options: Options): void {
   launchTerminal(launchFilePath, options);
 }
 
-export default function command(script: string, options: Options): void {
+export default function command(script: string, options: Options = {}): void {
   const isWindows = /^win/.test(process.platform);
 
   if (!isWindows) {
