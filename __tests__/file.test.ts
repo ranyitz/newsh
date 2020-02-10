@@ -1,9 +1,6 @@
 import * as newsh from "../";
 import tempy from "tempy";
 import path from "path";
-import fs from "fs";
-import waitFor from "p-wait-for";
-import pathExists from "path-exists";
 import { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
