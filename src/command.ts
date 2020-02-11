@@ -58,7 +58,7 @@ function commandUnix(script: string, options: Options): void {
   const moveToDirCommand = `cd ${process.cwd()};`;
 
   const scriptWithMovePrefix =
-    moveToDirCommand + "\n" + environmentParams.join("") + "\n" + script;
+    moveToDirCommand + environmentParams.join("") + script;
 
   fs.writeFileSync(launchFilePath, scriptWithMovePrefix);
 
