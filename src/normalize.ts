@@ -17,6 +17,7 @@ const defaultOptions: Options = {
   terminalApp: detectTerminalApp()
 };
 
+// eslint-disable-next-line
 function removeUndefinedValues(obj: Record<string, any>) {
   for (const key in obj) {
     if (obj[key] === undefined) {
@@ -26,6 +27,7 @@ function removeUndefinedValues(obj: Record<string, any>) {
 
   return obj;
 }
+
 export default (initialOptions: InitialOptions): Options => {
   const options = {
     ...defaultOptions,

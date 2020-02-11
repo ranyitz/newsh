@@ -30,6 +30,15 @@ exit`;
   launchTerminal(launchFilePath, options);
 }
 
+// There is a bug when npm create environment params which contains `"`
+// Usually when trying to take npm scripts which contains `\"` in them
+// (e.g. VAR="npm_package_scripts_test_watch="tsc --watch"")
+// They clash with the `"` used for the definition of the variable in bash
+// This is a best effort to assign them by changing them to `'`
+function escapeDoubleQuotes(value: string | undefined): string | undefined {
+  return value?.replace(/"/g, `'`);
+}
+
 function commandUnix(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");
   const { env } = options;
@@ -39,7 +48,9 @@ function commandUnix(script: string, options: Options): void {
   if (env) {
     for (const paramKey in env) {
       if (env[paramKey]) {
-        environmentParams.push(`${paramKey}="${env[paramKey]}" `);
+        environmentParams.push(
+          `${paramKey}="${escapeDoubleQuotes(env[paramKey])}" `
+        );
       }
     }
   }
@@ -47,7 +58,7 @@ function commandUnix(script: string, options: Options): void {
   const moveToDirCommand = `cd ${process.cwd()};`;
 
   const scriptWithMovePrefix =
-    moveToDirCommand + environmentParams.join("") + script;
+    moveToDirCommand + "\n" + environmentParams.join("") + "\n" + script;
 
   fs.writeFileSync(launchFilePath, scriptWithMovePrefix);
 
