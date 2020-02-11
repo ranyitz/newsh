@@ -10,14 +10,14 @@ import arg from "arg";
 import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
 import command from "./command";
-import normalize from "./normalize";
 import { ErrorMessage } from "./utils";
 
 export type InitialOptions = {
-  env: NodeJS.ProcessEnv;
-  splitDirection: string | undefined;
-  split: boolean | undefined;
-  terminalApp: string | undefined;
+  env?: NodeJS.ProcessEnv;
+  cwd?: string | undefined;
+  splitDirection?: string | undefined;
+  split?: boolean | undefined;
+  terminalApp?: string | undefined;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -85,14 +85,13 @@ const splitDirection = args["--split-vertically"]
   ? "horizontally"
   : undefined;
 
-const cliOptions: InitialOptions = {
+const initialOptions: InitialOptions = {
   env: {},
+  cwd: undefined,
   split: !!splitDirection,
   splitDirection,
   terminalApp: args["--terminalApp"]
 };
 
-const options = normalize(cliOptions);
-
-scripts?.forEach(script => command(script, options));
-files?.forEach(filePath => launchFileInNewTerminal(filePath, options));
+scripts?.forEach(script => command(script, initialOptions));
+files?.forEach(filePath => launchFileInNewTerminal(filePath, initialOptions));

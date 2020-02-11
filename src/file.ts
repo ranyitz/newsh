@@ -1,11 +1,17 @@
 import path from "path";
 import command from "./command";
-import { Options } from "./normalize";
 import { ErrorMessage } from "./utils";
+import { InitialOptions } from "./cli";
+import normalize from "./normalize";
 
-export default function file(filePath: string, options: Options = {}): void {
+export default function file(
+  filePath: string,
+  initialOptions: InitialOptions = {}
+): void {
+  const options = normalize(initialOptions);
+
   if (!path.isAbsolute(filePath)) {
-    filePath = path.join(process.cwd(), filePath);
+    filePath = path.join(options.cwd, filePath);
   }
 
   const extention = path.extname(filePath);

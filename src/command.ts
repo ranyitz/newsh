@@ -2,7 +2,8 @@ import path from "path";
 import tempy from "tempy";
 import fs from "fs";
 import launchTerminal from "./launchTerminal";
-import { Options } from "./normalize";
+import normalize, { Options } from "./normalize";
+import { InitialOptions } from "./cli";
 
 function commandWindows(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
@@ -29,16 +30,27 @@ exit`;
   launchTerminal(launchFilePath, options);
 }
 
+// There is a bug when npm create environment params which contains `"`
+// Usually when trying to take npm scripts which contains `\"` in them
+// (e.g. VAR="npm_package_scripts_test_watch="tsc --watch"")
+// They clash with the `"` used for the definition of the variable in bash
+// This is a best effort to assign them by changing them to `'`
+function escapeDoubleQuotes(value: string | undefined): string | undefined {
+  return value?.replace(/"/g, `'`);
+}
+
 function commandUnix(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");
+  const { env } = options;
 
   const environmentParams = [];
-  const { env } = options;
 
   if (env) {
     for (const paramKey in env) {
       if (env[paramKey]) {
-        environmentParams.push(`${paramKey}="${env[paramKey]}" `);
+        environmentParams.push(
+          `${paramKey}="${escapeDoubleQuotes(env[paramKey])}" `
+        );
       }
     }
   }
@@ -56,7 +68,11 @@ function commandUnix(script: string, options: Options): void {
   launchTerminal(launchFilePath, options);
 }
 
-export default function command(script: string, options: Options = {}): void {
+export default function command(
+  script: string,
+  initialOptions: InitialOptions = {}
+): void {
+  const options = normalize(initialOptions);
   const isWindows = /^win/.test(process.platform);
 
   if (!isWindows) {

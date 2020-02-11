@@ -1,23 +1,42 @@
 import { InitialOptions } from "./cli";
-import merge from "lodash.merge";
 import { detectTerminalApp } from "./utils";
 
 export type Options = {
-  env?: NodeJS.ProcessEnv;
-  split?: boolean;
-  splitDirection?: "vertically" | "horizontally";
-  terminalApp?: string;
+  env: NodeJS.ProcessEnv;
+  cwd: string;
+  split: boolean;
+  splitDirection: "vertically" | "horizontally";
+  terminalApp: string | undefined;
 };
 
-const defaultOptions: InitialOptions = {
+const defaultOptions: Options = {
   env: process.env,
+  cwd: process.cwd(),
   split: false,
   splitDirection: "vertically",
   terminalApp: detectTerminalApp()
 };
 
-export default (initialOptions: InitialOptions): Options => {
-  const optionsWithDefaults = merge(defaultOptions, initialOptions);
+// eslint-disable-next-line
+function removeUndefinedValues(obj: Record<string, any>) {
+  for (const key in obj) {
+    if (obj[key] === undefined) {
+      delete obj[key];
+    }
+  }
 
-  return optionsWithDefaults as Options;
+  return obj;
+}
+
+export default (initialOptions: InitialOptions): Options => {
+  const options = {
+    ...defaultOptions,
+    ...removeUndefinedValues(initialOptions),
+    env: {
+      ...defaultOptions.env,
+      ...initialOptions.env
+    }
+  };
+
+  return options as Options;
 };
