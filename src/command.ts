@@ -2,7 +2,8 @@ import path from "path";
 import tempy from "tempy";
 import fs from "fs";
 import launchTerminal from "./launchTerminal";
-import { Options } from "./normalize";
+import normalize, { Options } from "./normalize";
+import { InitialOptions } from "./cli";
 
 function commandWindows(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
@@ -31,9 +32,9 @@ exit`;
 
 function commandUnix(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");
+  const { env } = options;
 
   const environmentParams = [];
-  const { env } = options;
 
   if (env) {
     for (const paramKey in env) {
@@ -56,7 +57,11 @@ function commandUnix(script: string, options: Options): void {
   launchTerminal(launchFilePath, options);
 }
 
-export default function command(script: string, options: Options = {}): void {
+export default function command(
+  script: string,
+  initialOptions: InitialOptions = {}
+): void {
+  const options = normalize(initialOptions);
   const isWindows = /^win/.test(process.platform);
 
   if (!isWindows) {
