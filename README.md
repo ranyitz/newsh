@@ -51,8 +51,6 @@ newsh "tsc --watch" "jest --watch"
 
 > Note that you can use `tsc`, `jest` and any other local bin just like in npm/yarn scripts
 
-<p align="center"><img src="assets/newsh-tmux.gif" width="94%"/></p>
-
 ### --split-horizontally
 
 Attempts to split the screen horizontally instead of opening a new tab/window
@@ -72,6 +70,8 @@ newsh --split-vertically "say right"
 ### --split
 
 Alias for `--split-vertically`
+
+<p align="center"><img src="assets/newsh-tmux.gif" width="94%"/></p>
 
 ### --terminalApp
 
