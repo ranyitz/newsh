@@ -25,6 +25,28 @@ The main problem with this approach is that the developer is now required to und
 - 🎛 Supports spliting (`iterm2`/`tmux`)
 - 🌴 Pass environment parameters to the new shell instance
 
+## Installation
+
+You can choose to install using `yarn` or `npm`
+
+```sh
+yarn add --dev newsh
+```
+
+```sh
+npm install -D newsh
+```
+
+In case you want the `newsh` command to be available globally:
+
+```sh
+yarn global add newsh
+```
+
+```sh
+npm install newsh --global
+```
+
 ## CLI
 
 #### Run a command in a new shell
@@ -120,6 +142,21 @@ command(script: string, options: Options): void
 ```ts
 file(scriptPath: string, options: Options): void
 ```
+
+## Development
+
+```sh
+# install
+yarn
+# compile
+yarn watch
+# test
+yarn test
+```
+
+## Contributing
+
+If you find a bug or want this project to provide better support for a certain terminal application, please open an issue. You are more than welcome to create pull requests as well.
 
 ## Future
 
