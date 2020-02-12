@@ -75,6 +75,16 @@ export default function command(
   const options = normalize(initialOptions);
   const isWindows = /^win/.test(process.platform);
 
+  const nodeModulesBin = path.join(options.cwd, "node_modules", ".bin");
+
+  if (fs.existsSync(nodeModulesBin)) {
+    if (isWindows) {
+      options.env.Path = `${nodeModulesBin}:${options.env.Path}`;
+    } else {
+      options.env.PATH = `${nodeModulesBin}:${options.env.PATH}`;
+    }
+  }
+
   if (!isWindows) {
     commandUnix(script, options);
   } else {

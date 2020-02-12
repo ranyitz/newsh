@@ -1,9 +1,11 @@
 import * as newsh from "../";
+import path from "path";
 import tempy from "tempy";
 import { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
 const writeCwdFuncPath = require.resolve("./utils/writeCwd");
+const writePATHFuncPath = require.resolve("./utils/writePATH");
 
 test("command is running", async () => {
   const testFile = tempy.file();
@@ -32,4 +34,22 @@ test("command is running in the same cwd", async () => {
   await waitForFile(testFile);
 
   expect(readFile(testFile)).toBe(process.cwd());
+});
+
+test("command is pushing ${cwd}/node_module/.bin to PATH", async () => {
+  const testFile = tempy.file();
+
+  newsh.command(`node ${writePATHFuncPath}`, {
+    env: {
+      __PATH__: testFile
+    }
+  });
+
+  await waitForFile(testFile);
+
+  const content = readFile(testFile);
+
+  const firstPATHChunk = content.slice(0, content.indexOf(":", 2));
+
+  expect(firstPATHChunk).toMatch(`node_modules${path.sep}.bin`);
 });
