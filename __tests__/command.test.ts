@@ -48,7 +48,8 @@ test("command is pushing ${cwd}/node_module/.bin to PATH", async () => {
   await waitForFile(testFile);
 
   const content = readFile(testFile);
-  const firstPATHChunk = content.slice(0, content.indexOf(":"));
+
+  const firstPATHChunk = content.slice(0, content.indexOf(":", 2));
 
   expect(firstPATHChunk).toMatch(`node_modules${path.sep}.bin`);
 });

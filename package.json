@@ -17,9 +17,6 @@
     "type": "git",
     "url": "https://github.com/ranyitz/newsh"
   },
-  "engines": {
-    "node": ">=10.0.0"
-  },
   "author": {
     "name": "Ran Yitzhaki",
     "email": "ranyitz@gmail.com",
