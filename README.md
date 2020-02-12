@@ -18,7 +18,8 @@
 - 🌏 Cross-platform
 - 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
-- 🎛 Supports spliting with `iterm2` & `tmux`
+- 🎛 Supports spliting (`iterm2`/`tmux`)
+- 🌴 Pass environment parameters to the new shell instance
 
 ## CLI
 
@@ -41,8 +42,10 @@ newsh pwd
 > You can run multiple shells
 
 ```sh
-newsh "npx tsc --watch" "npx jest --watch"
+newsh "tsc --watch" "jest --watch"
 ```
+
+> Note that you can use `tsc`, `jest` and any other local bin just like in npm/yarn scripts
 
 <p align="center"><img src="assets/newsh-tmux.gif" width="94%"/></p>
 
@@ -115,7 +118,5 @@ file(scriptPath: string, options: Options): void
 
 ## Future
 
-- Run npm scripts in a new terminal (and resolve bins from the `node_modules/.bin` directory)
 - Controll the focus of the terminal window
-- Pass environment parameters from the CLI
 - Manage IPC with the other terminal window (similar to `child_process.fork`)

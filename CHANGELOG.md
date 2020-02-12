@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 (Feb 12, 2020)
+
+- [#8](https://github.com/ranyitz/newsh/pull/8) Remove `lodash.merge` to lower download size
+- Pass environment parameters from the initial process to the new shell
+- [#10](https://github.com/ranyitz/newsh/pull/10) Add `${cwd}/node_modules/.bin` directory to `PATH`/`Path`
+
 ## 0.4.1 (Feb 11, 2020)
 
 - Added support for multiple cases of iTerm app name
