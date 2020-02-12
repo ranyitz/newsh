@@ -10,7 +10,11 @@
 
 <h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
 
-> When you have many cli apps that takes the whole terminal, it's useful to run them all with a single command
+Sometimes a certain development environment requires more than a single terminal window, so you open a new one, or even better, split into multiple panes. This happens because nowadays, we have many interactive CLI apps that take the whole terminal window. In those cases, we'll see an explanation in the README that instructs us which commands should we run.
+
+The main problem with this approach is that the developer is now required to understand multiple commands. Another problem is that we can't make sure that the developer will get the desired developer experience if it requires manual actions. For example, run a command, split panes in the terminal and then run another command.
+
+**newsh** is here to solve these problems, it lets you configure how many terminal windows, tabs or splits you need and what commands to run in each one. It does its best effort to use features that your own terminal provides, like splitting panes. But worry not, in case a feature is not available, a regular terminal window is guaranteed to be opened.
 
 ## Features
 
@@ -54,7 +58,7 @@ newsh "tsc --watch" "jest --watch"
 Attempts to split the screen horizontally instead of opening a new tab/window
 
 ```sh
-newsh --split-horizontally "echo hello"
+newsh --split-horizontally "say down"
 ```
 
 ### --split-vertically
@@ -62,7 +66,7 @@ newsh --split-horizontally "echo hello"
 Attempts to split the screen vertically instead of opening a new tab/window
 
 ```sh
-newsh --split-vertically "echo hello"
+newsh --split-vertically "say right"
 ```
 
 ### --split
@@ -94,6 +98,7 @@ newsh --file "./script.js"
 ```ts
 type Options = {
   env?: Record<string, string> = {};
+  cwd?: string = process.cwd();
   split?: boolean = false;
   splitDirection?: "vertically" | "horizontally" = "vertically";
   terminalApp?: string | undefined = $TERM_PROGRAM;
@@ -119,4 +124,4 @@ file(scriptPath: string, options: Options): void
 ## Future
 
 - Controll the focus of the terminal window
-- Manage IPC with the other terminal window (similar to `child_process.fork`)
+- Better `split` integration with other terminals (`hyper`, `conEmu` and more)
