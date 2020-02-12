@@ -29,10 +29,10 @@
   "scripts": {
     "newsh": "node bin/newsh.js",
     "build": "tsc",
-    "watch": "yarn newsh --split \"tsc --watch\"",
-    "lint": "eslint \"*/**/*.{js,ts}\"",
+    "watch": "tsc --watch",
+    "lint": "eslint '*/**/*.{js,ts}'",
     "test": "jest",
-    "test:watch": "yarn newsh \"jest --watch\""
+    "test:watch": "jest --watch"
   },
   "husky": {
     "hooks": {
