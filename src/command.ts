@@ -78,7 +78,11 @@ export default function command(
   const nodeModulesBin = path.join(options.cwd, "node_modules", ".bin");
 
   if (fs.existsSync(nodeModulesBin)) {
-    options.env.PATH = `${nodeModulesBin}:${options.env.PATH}`;
+    if (isWindows) {
+      options.env.Path = `${nodeModulesBin}:${options.env.Path}`;
+    } else {
+      options.env.PATH = `${nodeModulesBin}:${options.env.PATH}`;
+    }
   }
 
   if (!isWindows) {
