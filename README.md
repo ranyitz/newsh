@@ -8,7 +8,7 @@
 </p>
 <p align="center"><img src="assets/newsh-iterm.gif" width="90%"/></p>
 
-<h2 align="center">🐚 cross-platform library to execute commands in a new shells</h2>
+<h2 align="center">🐚 cross-platform library to execute commands in new shells</h2>
 
 Sometimes a certain development environment requires more than a single terminal window, so you open a new one, or even better, split into multiple panes. This happens because nowadays, we have many interactive CLI apps that take the whole terminal window. In those cases, we'll see an explanation in the README that instructs us which commands should we run.
 
