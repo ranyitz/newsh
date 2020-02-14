@@ -18,11 +18,10 @@ The main problem with this approach is that the developer is now required to und
 
 ## Features
 
-- 👯‍♂️ Attempts to use the current terminal
 - 🌏 Cross-platform
-- 📄 Runs js files with node
 - 🗃 Opens the new shell in current working directory
-- 🎛 Supports spliting (`iterm2`/`tmux`)
+- 🎛 Supports splitting (`iterm2`/`tmux`)
+- 📄 Runs js files with node
 - 🌴 Pass environment parameters to the new shell instance
 
 ## Installation
