@@ -55,7 +55,7 @@ function commandUnix(script: string, options: Options): void {
     }
   }
 
-  const moveToDirCommand = `cd ${process.cwd()};`;
+  const moveToDirCommand = `cd ${options.cd};`;
 
   const scriptWithMovePrefix =
     moveToDirCommand + environmentParams.join("") + script;

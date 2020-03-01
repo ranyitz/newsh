@@ -15,6 +15,7 @@ import { ErrorMessage } from "./utils";
 export type InitialOptions = {
   env?: NodeJS.ProcessEnv;
   cwd?: string | undefined;
+  cd?: string | undefined;
   splitDirection?: string | undefined;
   split?: boolean | undefined;
   terminalApp?: string | undefined;
