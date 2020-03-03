@@ -118,12 +118,12 @@ newsh --file "./script.js"
 
 ```ts
 type Options = {
-  env?: Record<string, string> = {};
-  cwd?: string = process.cwd();
-  cd?: string = process.cwd();
-  split?: boolean = false;
-  splitDirection?: "vertically" | "horizontally" = "vertically";
-  terminalApp?: string | undefined = $TERM_PROGRAM;
+  env?: Record<string, string> = {}; // Environment parameters that would be passed to the new shell
+  cwd?: string = process.cwd(); // Where the newsh command should run (use for joining relative paths of files))
+  cd?: string = process.cwd(); // A path to a directory that the new shell will use
+  split?: boolean = false; // Attempts to split the terminal window
+  splitDirection?: "vertically" | "horizontally" = "vertically"; // The direction of splitting (only works when `split: true`)
+  terminalApp?: string | undefined = $TERM_PROGRAM; // Use a specific terminal app
 };
 ```
 
