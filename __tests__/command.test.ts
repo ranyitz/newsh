@@ -36,6 +36,22 @@ test("command is running in the same cwd", async () => {
   expect(readFile(testFile)).toBe(process.cwd());
 });
 
+test("command accepts a custom cd directory", async () => {
+  const testFile = tempy.file();
+  const customDir = tempy.directory();
+
+  newsh.command(`node ${writeCwdFuncPath}`, {
+    env: {
+      __PATH__: testFile
+    },
+    cd: customDir
+  });
+
+  await waitForFile(testFile);
+
+  expect(readFile(testFile)).toBe(customDir);
+});
+
 test("command is pushing ${cwd}/node_module/.bin to PATH", async () => {
   const testFile = tempy.file();
 

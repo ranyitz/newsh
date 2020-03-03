@@ -120,6 +120,7 @@ newsh --file "./script.js"
 type Options = {
   env?: Record<string, string> = {};
   cwd?: string = process.cwd();
+  cd?: string = process.cwd();
   split?: boolean = false;
   splitDirection?: "vertically" | "horizontally" = "vertically";
   terminalApp?: string | undefined = $TERM_PROGRAM;

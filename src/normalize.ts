@@ -4,6 +4,7 @@ import { detectTerminalApp } from "./utils";
 export type Options = {
   env: NodeJS.ProcessEnv;
   cwd: string;
+  cd: string;
   split: boolean;
   splitDirection: "vertically" | "horizontally";
   terminalApp: string | undefined;
@@ -12,6 +13,7 @@ export type Options = {
 const defaultOptions: Options = {
   env: process.env,
   cwd: process.cwd(),
+  cd: process.cwd(),
   split: false,
   splitDirection: "vertically",
   terminalApp: detectTerminalApp()
