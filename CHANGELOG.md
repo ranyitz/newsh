@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0 (Feb 12, 2020)
+
+- [#12](https://github.com/ranyitz/newsh/pull/12) Add support for `cd` option in node API (decide in which directory to run the new shell)
+
 ## 0.5.0 (Feb 12, 2020)
 
 - [#8](https://github.com/ranyitz/newsh/pull/8) Remove `lodash.merge` to lower download size
