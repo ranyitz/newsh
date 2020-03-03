@@ -20,7 +20,7 @@ function commandWindows(script: string, options: Options): void {
   const batFile = `
 @echo off
 ${environmentParams.join("\n")}
-start /D ${cd} cmd.exe @cmd ${script}
+start /D ${cd} cmd.exe @cmd /k ${script}
 pause
 exit`;
 
