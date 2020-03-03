@@ -41,7 +41,7 @@ function escapeDoubleQuotes(value: string | undefined): string | undefined {
 
 function commandUnix(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal");
-  const { env } = options;
+  const { env, cd } = options;
 
   const environmentParams = [];
 
@@ -55,7 +55,7 @@ function commandUnix(script: string, options: Options): void {
     }
   }
 
-  const moveToDirCommand = `cd ${options.cd};`;
+  const moveToDirCommand = `cd ${cd};`;
 
   const scriptWithMovePrefix =
     moveToDirCommand + environmentParams.join("") + script;
