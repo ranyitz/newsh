@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 (Mar 5, 2020)
+
+Fixed a bug when `iTerm` and `Linux` launchers didn't work
+
 ## 0.7.0 (Mar 4, 2020)
 
 - [#13](https://github.com/ranyitz/newsh/pull/13) Add `ConEmu` and `Cmder` split support
