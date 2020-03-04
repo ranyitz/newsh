@@ -2,6 +2,7 @@ import tempy from "tempy";
 import runNewsh, { waitForFile, readFile } from "./utils/runNewsh";
 
 const writeFileFuncPath = require.resolve("./utils/writeFile");
+const writeCwdFuncPath = require.resolve("./utils/writeCwd.js");
 
 describe("cli", () => {
   test("command", async () => {
@@ -68,5 +69,23 @@ describe("cli", () => {
 
     await waitForFile(testFile, child);
     expect(readFile(testFile)).toBe(testData);
+  });
+
+  test("cd", async () => {
+    const testFile = tempy.file();
+    const testDirectory = tempy.directory();
+
+    const child = await runNewsh(
+      [`--cd=${testDirectory}`, `node ${writeCwdFuncPath}`],
+      {
+        env: {
+          __PATH__: testFile
+        }
+      }
+    );
+
+    await waitForFile(testFile, child);
+
+    expect(readFile(testFile)).toBe(testDirectory);
   });
 });

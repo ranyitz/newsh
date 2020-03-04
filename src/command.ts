@@ -9,7 +9,7 @@ function commandWindows(script: string, options: Options): void {
   const launchFilePath = path.join(tempy.directory(), "launchTerminal.bat");
 
   const environmentParams = [];
-  const { env, cd } = options;
+  const { env } = options;
 
   if (env) {
     for (const paramKey in env) {
@@ -20,7 +20,7 @@ function commandWindows(script: string, options: Options): void {
   const batFile = `
 @echo off
 ${environmentParams.join("\n")}
-start /D ${cd} cmd.exe @cmd /k ${script}
+cmd.exe @cmd /k ${script}
 pause
 exit`;
 
