@@ -1,6 +1,11 @@
 # Changelog
 
-## 0.6.0 (Feb 12, 2020)
+## 0.7.0 (Mar 4, 2020)
+
+- [#13](https://github.com/ranyitz/newsh/pull/13) Add `ConEmu` and `Cmder` split support
+- [#13](https://github.com/ranyitz/newsh/pull/13) Add `--cd` as a CLI option
+
+## 0.6.0 (Mar 4, 2020)
 
 - [#12](https://github.com/ranyitz/newsh/pull/12) Add support for `cd` option in node API (decide in which directory to run the new shell)
 
