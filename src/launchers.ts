@@ -80,7 +80,7 @@ export const conEmu: Launcher = (execFilePath, options) => {
 
   try {
     exec(
-      `cmd.exe -new_console${splitSuffix}:d:"${options.cd}" /k ${execFilePath}`
+      `cmd.exe -new_console${splitSuffix}:b:d:"${options.cd}" /k ${execFilePath}`
     );
   } catch (error) {
     windows(execFilePath, options);
