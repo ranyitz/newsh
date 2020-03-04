@@ -33,6 +33,7 @@ const args = arg(
     "--split-horizontally": Boolean,
     "--split-vertically": Boolean,
     "--terminalApp": String,
+    "--cd": String,
 
     // Aliases
     "-v": "--version",
@@ -50,6 +51,7 @@ const help = chalk`
     {bold $} {cyan newsh} --file path/to/script
     {bold $} {cyan newsh} --split "npx jest --watch"
     {bold $} {cyan newsh} --split-horizontally "npx tsc --watch"
+    {bold $} {cyan newsh} --cd ~
     {bold $} {cyan newsh} --help
     {bold $} {cyan newsh} --version
   
@@ -61,6 +63,7 @@ const help = chalk`
     --split-horizontally    Split the screen horizontally instead of opening a new one (iTerm2 & tmux only)
     --split                 Alias for --split-vertically
     --terminalApp           Choose a specific terminal app to use (e.g. iTerm.app)
+    --cd                    Open the new shell in the specified directory
 `;
 
 if (args["--help"]) {
@@ -89,6 +92,7 @@ const splitDirection = args["--split-vertically"]
 const initialOptions: InitialOptions = {
   env: {},
   cwd: undefined,
+  cd: args["--cd"],
   split: !!splitDirection,
   splitDirection,
   terminalApp: args["--terminalApp"]

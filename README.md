@@ -20,7 +20,7 @@ The main problem with this approach is that the developer is now required to und
 
 - 🌏 Cross-platform
 - 🗃 Opens the new shell in current working directory
-- 🎛 Supports splitting (`iterm2`/`tmux`)
+- 🎛 Supports splitting (`iterm2`/`tmux`/`ConEmu`/`Cmder`)
 - 📄 Runs js files with node
 - 🌴 Pass environment parameters to the new shell instance
 
@@ -98,6 +98,14 @@ Alias for `--split-vertically`
 
 Choose a specific terminal app to use (e.g. `iTerm.app`)
 
+### --cd
+
+Open the new shell in the specified directory
+
+```sh
+newsh pwd --cd "~"
+```
+
 ### --file
 
 Executes a file in a new shell
@@ -161,4 +169,4 @@ If you find a bug or want this project to provide better support for a certain t
 ## Future
 
 - Controll the focus of the terminal window
-- Better `split` integration with other terminals (`hyper`, `conEmu` and more)
+- Better `split` integration with other terminals

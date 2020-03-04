@@ -1,4 +1,12 @@
-import { linux, mac, windows, iterm, tmux, Launcher } from "./launchers";
+import {
+  linux,
+  mac,
+  windows,
+  iterm,
+  tmux,
+  Launcher,
+  conEmu
+} from "./launchers";
 import { Options } from "./normalize";
 import { ErrorMessage } from "./utils";
 
@@ -11,7 +19,7 @@ function chooseLauncher(options: Options): Launcher {
   const isIterm = ["iTerm", "iTerm.app", "iTerm2", "iTerm2.app"].includes(
     terminalApp!
   );
-
+  const isConEmu = !!process.env.ConEmuBuild;
   const isTmux = !!process.env.TMUX_PANE;
 
   if (split) {
@@ -22,6 +30,10 @@ function chooseLauncher(options: Options): Launcher {
     if (isIterm) {
       return iterm;
     }
+  }
+
+  if (isConEmu) {
+    return conEmu;
   }
 
   if (isMac) {
