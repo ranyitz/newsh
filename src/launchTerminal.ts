@@ -1,40 +1,12 @@
-import {
-  linux,
-  mac,
-  windows,
-  iterm,
-  tmux,
-  Launcher,
-  conEmu
-} from "./launchers";
+import { linux, mac, windows, Launcher } from "./launchers";
 import { Options } from "./normalize";
 import { ErrorMessage } from "./utils";
 
-function chooseLauncher(options: Options): Launcher {
-  const { split, terminalApp } = options;
+function chooseLauncher(): Launcher {
   const platform = process.platform;
   const isWindows = /^win/.test(platform);
   const isMac = /darwin/.test(platform);
   const isLinux = /linux/.test(platform);
-  const isIterm = ["iTerm", "iTerm.app", "iTerm2", "iTerm2.app"].includes(
-    terminalApp!
-  );
-  const isConEmu = !!process.env.ConEmuBuild;
-  const isTmux = !!process.env.TMUX_PANE;
-
-  if (split) {
-    if (isTmux) {
-      return tmux;
-    }
-
-    if (isIterm) {
-      return iterm;
-    }
-  }
-
-  if (isConEmu) {
-    return conEmu;
-  }
 
   if (isMac) {
     return mac;
@@ -55,7 +27,7 @@ export default function launchTerminal(
   execFilePath: string,
   options: Options
 ): void {
-  const launcher = chooseLauncher(options);
+  const launcher = chooseLauncher();
 
   launcher(execFilePath, options);
 }
