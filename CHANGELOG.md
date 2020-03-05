@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.7.1 (Mar 5, 2020)
+## 0.7.2 (Mar 4, 2020)
+
+Source instead of exectue for `cd` like commands to take effect in the current shell
+
+## 0.7.1 (Mar 4, 2020)
 
 Fixed a bug when `iTerm` and `Linux` launchers didn't work
 

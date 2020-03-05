@@ -22,7 +22,7 @@ export const windows: Launcher = (execFilePath, options) => {
 
 export const linux: Launcher = (execFilePath, options) => {
   try {
-    execa.sync(options.terminalApp!, ["-e", `sh ${execFilePath}`], {
+    execa.sync(options.terminalApp!, ["-e", `source ${execFilePath}`], {
       detached: true
     });
   } catch (error) {
@@ -40,9 +40,9 @@ export const mac: Launcher = (execFilePath, options) => {
 
 export const iterm: Launcher = (execFilePath, options) => {
   try {
-    execa.sync(path.join(__dirname, "../scripts/iterm.sh"), [execFilePath], {
+    execa.sync(path.join(__dirname, "../scripts/iterm.sh"), {
       ...options.env,
-      env: { SPLIT_DIRECTION: options.splitDirection }
+      env: { SPLIT_DIRECTION: options.splitDirection, CMD: execFilePath }
     });
     return;
   } catch (error) {
@@ -55,9 +55,9 @@ export const tmux: Launcher = (execFilePath, options) => {
     const tmuxSplitDirection =
       options.splitDirection === "vertically" ? "h" : "v";
 
-    execa.sync(path.join(__dirname, "../scripts/tmux.sh"), [execFilePath], {
+    execa.sync(path.join(__dirname, "../scripts/tmux.sh"), {
       ...options.env,
-      env: { SPLIT_DIRECTION: tmuxSplitDirection }
+      env: { SPLIT_DIRECTION: tmuxSplitDirection, CMD: execFilePath }
     });
     return;
   } catch (error) {
