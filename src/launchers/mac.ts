@@ -8,6 +8,7 @@ export const mac: Launcher = (execFilePath, options) => {
   const isIterm = ["iTerm", "iTerm.app", "iTerm2", "iTerm2.app"].includes(
     terminalApp!
   );
+
   const isTmux = !!process.env.TMUX_PANE;
 
   try {
@@ -17,6 +18,15 @@ export const mac: Launcher = (execFilePath, options) => {
 
     if (isIterm && split) {
       return iterm(execFilePath, options);
+    }
+
+    // When running from VSCode/Apple_Terminal It's better to verify that
+    // we run the command using the Terminal.app
+    if (
+      !options.terminalApp ||
+      ["vscode", "Apple_Terminal"].includes(options.terminalApp)
+    ) {
+      options.terminalApp = "Terminal";
     }
 
     execa.sync("open", ["-a", options.terminalApp!, execFilePath]);
