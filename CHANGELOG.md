@@ -1,8 +1,12 @@
 # Changelog
 
+## 0.7.2 (Mar 5, 2020)
+
+- [#17](https://github.com/ranyitz/newsh/pull/17) Configure default terminal for mac in case of `VSCode`/`Apple_Terminal`
+
 ## 0.7.1 (Mar 5, 2020)
 
-Fixed a bug when `iTerm` and `Linux` launchers didn't work
+Fixed a bug where `iTerm` and `Linux` launchers didn't work
 
 ## 0.7.0 (Mar 4, 2020)
 
