@@ -11,6 +11,10 @@ export const mac: Launcher = (execFilePath, options) => {
 
   const isTmux = !!process.env.TMUX_PANE;
 
+  if (options.terminalAppSetup !== undefined) {
+    console.error(`terminalAppSetup not supported on mac yet`);
+  }
+
   try {
     if (isTmux && split) {
       return tmux(execFilePath, options);

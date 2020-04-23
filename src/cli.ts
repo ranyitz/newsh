@@ -11,6 +11,7 @@ import chalk from "chalk";
 import launchFileInNewTerminal from "./file";
 import command from "./command";
 import { ErrorMessage } from "./utils";
+import fs from "fs";
 
 export type InitialOptions = {
   env?: NodeJS.ProcessEnv;
@@ -19,6 +20,7 @@ export type InitialOptions = {
   splitDirection?: string | undefined;
   split?: boolean | undefined;
   terminalApp?: string | undefined;
+  terminalAppSetup?: string | undefined;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -33,6 +35,7 @@ const args = arg(
     "--split-horizontally": Boolean,
     "--split-vertically": Boolean,
     "--terminalApp": String,
+    "--terminalAppSetup": String,
     "--cd": String,
 
     // Aliases
@@ -63,6 +66,7 @@ const help = chalk`
     --split-horizontally    Split the screen horizontally instead of opening a new one (iTerm2 & tmux only)
     --split                 Alias for --split-vertically
     --terminalApp           Choose a specific terminal app to use (e.g. iTerm.app)
+    --terminalAppSetup      The arguments to the terminal for the command to execute. Use \{\{command\}\} for command argument, example : --terminalAppSetup="-e \{\{command\}\}"
     --cd                    Open the new shell in the specified directory
 `;
 
@@ -89,13 +93,20 @@ const splitDirection = args["--split-vertically"]
   ? "horizontally"
   : undefined;
 
+let optionsFromFile: InitialOptions = {};
+try {
+  optionsFromFile = JSON.parse(fs.readFileSync("./.newsh.json").toString());
+} catch (e) {}
+
 const initialOptions: InitialOptions = {
   env: {},
   cwd: undefined,
-  cd: args["--cd"],
-  split: !!splitDirection,
-  splitDirection,
-  terminalApp: args["--terminalApp"]
+  cd: args["--cd"] || optionsFromFile.cd,
+  split: !!(splitDirection || optionsFromFile.splitDirection),
+  splitDirection: splitDirection || optionsFromFile.splitDirection,
+  terminalApp: args["--terminalApp"] || optionsFromFile.terminalApp,
+  terminalAppSetup:
+    args["--terminalAppSetup"] || optionsFromFile.terminalAppSetup
 };
 
 scripts?.forEach(script => command(script, initialOptions));

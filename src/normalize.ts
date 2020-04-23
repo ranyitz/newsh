@@ -8,6 +8,7 @@ export type Options = {
   split: boolean;
   splitDirection: "vertically" | "horizontally";
   terminalApp: string | undefined;
+  terminalAppSetup?: string | undefined;
 };
 
 const defaultOptions: Options = {
