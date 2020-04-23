@@ -13,7 +13,11 @@ function commandWindows(script: string, options: Options): void {
 
   if (env) {
     for (const paramKey in env) {
-      environmentParams.push(`set ${paramKey}=${env[paramKey]}`);
+      if (paramKey.startsWith("npm_package_scripts_")) {
+        environmentParams.push(`set ${paramKey}="${env[paramKey]}"`);
+      } else {
+        environmentParams.push(`set ${paramKey}=${env[paramKey]}`);
+      }
     }
   }
 
