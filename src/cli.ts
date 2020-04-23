@@ -66,7 +66,7 @@ const help = chalk`
     --split-horizontally    Split the screen horizontally instead of opening a new one (iTerm2 & tmux only)
     --split                 Alias for --split-vertically
     --terminalApp           Choose a specific terminal app to use (e.g. iTerm.app)
-    --terminalAppSetup      The arguments to pass a file to execute, use \{\{file\}\} for file argument
+    --terminalAppSetup      The arguments to the terminal for the command to execute. Use \{\{command\}\} for command argument, example : --terminalAppSetup="-e \{\{command\}\}"
     --cd                    Open the new shell in the specified directory
 `;
 

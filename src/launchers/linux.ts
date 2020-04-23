@@ -2,12 +2,12 @@ import execa from "execa";
 import { Launcher } from "./";
 
 export const linux: Launcher = (execFilePath, options) => {
-  let argArray = ["-e", "{{file}}"];
+  let argArray = ["-e", "{{command}}"];
   if (options.terminalAppSetup !== undefined) {
     argArray = options.terminalAppSetup.split(" ");
   }
   for (let i = 0; i < argArray.length; i++) {
-    if (argArray[i] === "{{file}}") {
+    if (argArray[i] === "{{command}}") {
       argArray[i] = `sh ${execFilePath}`;
     }
   }
