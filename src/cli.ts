@@ -66,7 +66,7 @@ const help = chalk`
     --split-horizontally    Split the screen horizontally instead of opening a new one (iTerm2 & tmux only)
     --split                 Alias for --split-vertically
     --terminalApp           Choose a specific terminal app to use (e.g. iTerm.app)
-    --terminalAppSetup      The arguments to pass a file to execute, use {{file}} for file argument
+    --terminalAppSetup      The arguments to pass a file to execute, use \{\{file\}\} for file argument
     --cd                    Open the new shell in the specified directory
 `;
 
@@ -98,15 +98,16 @@ try {
   optionsFromFile = JSON.parse(fs.readFileSync("./.newsh.json").toString());
 } catch (e) {}
 
-const initialOptions: InitialOptions = Object.assign(optionsFromFile, {
+const initialOptions: InitialOptions = {
   env: {},
   cwd: undefined,
-  cd: args["--cd"],
-  split: !!splitDirection,
-  splitDirection,
-  terminalApp: args["--terminalApp"],
-  terminalAppSetup: args["--terminalAppSetup"]
-});
+  cd: args["--cd"] || optionsFromFile.cd,
+  split: !!(splitDirection || optionsFromFile.splitDirection),
+  splitDirection: splitDirection || optionsFromFile.splitDirection,
+  terminalApp: args["--terminalApp"] || optionsFromFile.terminalApp,
+  terminalAppSetup:
+    args["--terminalAppSetup"] || optionsFromFile.terminalAppSetup
+};
 
 scripts?.forEach(script => command(script, initialOptions));
 files?.forEach(filePath => launchFileInNewTerminal(filePath, initialOptions));
