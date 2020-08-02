@@ -1,6 +1,6 @@
 {
   "name": "newsh",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "main": "build/index.js",
   "description": "cross-platform library to execute commands in a new shells",
   "keywords": [
