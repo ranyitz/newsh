@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.7.3 (Mar 5, 2020)
+## 0.7.4 (Mar 5, 2020)
 
 - [#17](https://github.com/ranyitz/newsh/pull/17) Configure default terminal for mac in case of `VSCode`/`Apple_Terminal`
 
