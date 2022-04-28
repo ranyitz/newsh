@@ -23,9 +23,7 @@
     "url": "https://github.com/ranyitz"
   },
   "license": "MIT",
-  "bin": {
-    "newsh": "bin/newsh.js"
-  },
+  "bin": "bin/newsh.js",
   "scripts": {
     "newsh": "node bin/newsh.js",
     "build": "tsc",
@@ -77,5 +75,6 @@
     "command-exists": "^1.2.9",
     "execa": "^4.0.0",
     "tempy": "^0.3.0"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
