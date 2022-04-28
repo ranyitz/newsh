@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 12
+      - name: Use Node.js 16
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
 
       - name: install and lint
         run: |
@@ -22,8 +22,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: ["10", "12"]
-        os: [ubuntu-latest, windows-2016, macOS-latest]
+        node_version: ["14", "16", "18"]
+        os: [ubuntu-latest, windows-2019, macOS-latest]
 
     steps:
       - uses: actions/checkout@v2
